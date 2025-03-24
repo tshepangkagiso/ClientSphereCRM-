@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35828.75 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRM_API", "CRM_API\CRM_API.csproj", "{4664742C-232B-422C-9776-04B9E14090F2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CRM_SQLScript", "CRM_SQLScript", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+	ProjectSection(SolutionItems) = preProject
+		BackupCRM_DB\CRM_Script.sql = BackupCRM_DB\CRM_Script.sql
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRM_EMPLOYEES_APP", "CRM_EMPLOYEES_APP\CRM_EMPLOYEES_APP.csproj", "{29438379-7B1A-426C-8E1F-7E852ACF57E4}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "CRM_CLIENTS_APP", "CRM_CLIENTS_APP\CRM_CLIENTS_APP.esproj", "{638D57DC-2285-729F-D424-3CBDCB1BFB00}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "README", "README", "{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4664742C-232B-422C-9776-04B9E14090F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4664742C-232B-422C-9776-04B9E14090F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4664742C-232B-422C-9776-04B9E14090F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4664742C-232B-422C-9776-04B9E14090F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29438379-7B1A-426C-8E1F-7E852ACF57E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29438379-7B1A-426C-8E1F-7E852ACF57E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29438379-7B1A-426C-8E1F-7E852ACF57E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29438379-7B1A-426C-8E1F-7E852ACF57E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{638D57DC-2285-729F-D424-3CBDCB1BFB00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{638D57DC-2285-729F-D424-3CBDCB1BFB00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{638D57DC-2285-729F-D424-3CBDCB1BFB00}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{638D57DC-2285-729F-D424-3CBDCB1BFB00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{638D57DC-2285-729F-D424-3CBDCB1BFB00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{638D57DC-2285-729F-D424-3CBDCB1BFB00}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {59CE8E85-8D23-4F9C-B231-D3A17FC006DB}
+	EndGlobalSection
+EndGlobal
