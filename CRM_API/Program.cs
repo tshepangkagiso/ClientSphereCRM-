@@ -1,12 +1,22 @@
+using CRM_API.Data;
+using CRM_API.Data.Services;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+{
+    options.UseSqlServer(Environment.GetEnvironmentVariable("CONNECTION_STRING"));
+});
+
+builder.Services.AddTransient<IClientDbServices, ClientDbServices>();
+
 
 builder.Services.AddControllers();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+
 
 app.UseHttpsRedirection();
 
