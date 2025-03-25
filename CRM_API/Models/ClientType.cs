@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace CRM_API.Models;
 
 public partial class ClientType
 {
-    public int TypeId { get; set; }
+    [Key]
+    [Column("TypeID")]
+    public int TypeID { get; set; }
 
     public string TypeName { get; set; } = null!;
 

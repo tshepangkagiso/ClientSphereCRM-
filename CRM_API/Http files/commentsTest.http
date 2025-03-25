@@ -1,0 +1,41 @@
+﻿@CRM_API_HostAddress = https://localhost:7129
+
+### send by employee
+POST {{CRM_API_HostAddress}}/comment
+Content-Type: application/json
+
+{
+  "commentMessage": "We have a new product for you.",
+  "commentSentBy": "0cd94ad9-6d65-45f7-b368-344c6afaf0a0",
+  "commentSentTo": "cf99c2b1-a6bd-47ca-a9b9-85183fb37f43"
+}
+
+### Sent by client
+POST {{CRM_API_HostAddress}}/comment
+Content-Type: application/json
+
+{
+  "commentMessage": "Hi I just saw your message.",
+  "commentSentBy": "cf99c2b1-a6bd-47ca-a9b9-85183fb37f43",
+  "commentSentTo": "0cd94ad9-6d65-45f7-b368-344c6afaf0a0"
+}
+
+### ❌ Bad POST request (Missing fields)
+POST {{CRM_API_HostAddress}}/comment
+Content-Type: application/json
+
+{
+  "commentSentBy": "11111111-1111-1111-1111-111111111111"
+}
+
+---
+
+### messages sent by client to employees
+GET {{CRM_API_HostAddress}}/comment/cf99c2b1-a6bd-47ca-a9b9-85183fb37f43/0cd94ad9-6d65-45f7-b368-344c6afaf0a0
+
+### messages sent by employee to client
+GET {{CRM_API_HostAddress}}/comment/0cd94ad9-6d65-45f7-b368-344c6afaf0a0/cf99c2b1-a6bd-47ca-a9b9-85183fb37f43
+
+### ❌ Bad GET request (Missing parameter)
+GET {{CRM_API_HostAddress}}/comment/11111111-1111-1111-1111-111111111111
+

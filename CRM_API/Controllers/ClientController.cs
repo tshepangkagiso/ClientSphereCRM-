@@ -1,9 +1,11 @@
 ﻿using CRM_API.Data;
-using CRM_API.Data.Services;
+using CRM_API.Data.Services.Interfaces;
 using CRM_API.Models;
 using CRM_API.Models.DTOs;
+using CRM_API.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 namespace CRM_API.Controllers
 {
@@ -39,12 +41,12 @@ namespace CRM_API.Controllers
         }
 
         [HttpGet("{Id}")]
-        public async Task<IActionResult> OnGetByIdAsync([FromRoute] Guid Id)
+        public IActionResult OnGetById([FromRoute] Guid Id)
         {
             try
             {
-                var client = await this.clientDbServices.GetClientByIdFromStoredProcedure(Id);
-                if (client.ClientId != Guid.Empty)
+                var client = this.clientDbServices.GetClientByIdFromStoredProcedure(Id);
+                if (client.ClientID != Guid.Empty)
                 {
                     return Ok(client);
                 }
@@ -59,21 +61,29 @@ namespace CRM_API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> OnPostAsync([FromBody] ClientDto client)
+        public async Task<IActionResult> OnPostAsync([FromBody] CreateClientDto client)
         {
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest(ModelState);  
-                }
+                if (!ModelState.IsValid) return BadRequest(ModelState);
 
                 if (client != null)
                 {
+                    
+                    var title = Convert.ToInt32(client.TitleId);
+                    var name = client.ClientName;
+                    var surname = client.ClientSurname;
+                    var email = client.ClientEmail;
+                    var address = client.ClientAddress;
+                    var contacts = client.ClientContactNumber;
+                    byte[] photo = string.IsNullOrEmpty(client.ClientProfilePicture) ? new byte[] { } : Convert.FromBase64String(client.ClientProfilePicture);
+                    var type = client.TypeId;
+                    var username = client.LoginUsername;
+                    var password = PasswordServices.EncryptPassword(client.LoginPassword);
 
-                    /*await this.cl
-                    await this.dbContext.SaveChangesAsync();*/
-                    return Ok(client);
+                    await this.clientDbServices.CreateClient(title, name, surname, email??"", contacts, address, photo, type,username,password);
+                    await this.clientDbServices.SaveChangesAsync();
+                    return Ok("Client successfully created.");
                 }
 
                 ModelState.AddModelError(string.Empty, "Client data is invalid.");
@@ -91,16 +101,24 @@ namespace CRM_API.Controllers
         {
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest(ModelState);  
-                }
+                if (!ModelState.IsValid) return BadRequest(ModelState);
 
-                var client = ""; //await this.dbContext.UpdateClient(Id,clientDto.ClientName);
-                if (client != null)
+
+                var client = this.clientDbServices.GetClientByIdFromStoredProcedure(Id);
+                if (client.ClientID != Guid.Empty)
                 {
-                    await this.dbContext.SaveChangesAsync();
-                    return Ok(client);
+                    var title = Convert.ToInt32(clientDto.TitleId);
+                    var name = clientDto.ClientName;
+                    var surname = clientDto.ClientSurname;
+                    var email = clientDto.ClientEmail;
+                    var address = clientDto.ClientAddress;
+                    var contacts = clientDto.ClientContactNumber;
+                    byte[] photo = string.IsNullOrEmpty(clientDto.ClientProfilePicture) ? new byte[] { } : Convert.FromBase64String(clientDto.ClientProfilePicture);
+                    var type = clientDto.TypeId;
+
+                    await this.clientDbServices.UpdateClient(client.ClientID, title, name, surname, email ?? "", contacts, address, photo, type);
+                    await this.clientDbServices.SaveChangesAsync();
+                    return Ok("Client successfully updated");
                 }
 
                 ModelState.AddModelError(string.Empty, "Client not found.");
@@ -118,11 +136,11 @@ namespace CRM_API.Controllers
         {
             try
             {
-                var client = await this.dbContext.Clients.FirstOrDefaultAsync(x => x.ClientId == Id);
-                if (client != null)
+                var client = this.clientDbServices.GetClientByIdFromStoredProcedure(Id);
+                if (client.ClientID != Guid.Empty)
                 {
-                    this.dbContext.Remove(client);
-                    await this.dbContext.SaveChangesAsync();
+                    await this.clientDbServices.DeleteClientById(client.ClientID);
+                    await this.clientDbServices.SaveChangesAsync();
                     return Ok("Client has been deleted.");
                 }
 
@@ -135,6 +153,25 @@ namespace CRM_API.Controllers
                 return StatusCode(500, ModelState);
             }
         }
+
+        [HttpPut("{OldTypeID}/{NewTypeID}")]
+        public async Task<IActionResult> OnPutAsync([FromRoute]int OldTypeID, [FromRoute]int NewTypeID)
+        {
+            try
+            {
+                if (!ModelState.IsValid) return BadRequest(ModelState);
+                await this.clientDbServices.UpdateClientsType(OldTypeID, NewTypeID);
+                await this.clientDbServices.SaveChangesAsync();
+                return Ok("Successful Update of client type.");
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, "Server Error: " + ex.Message);
+                return StatusCode(500, ModelState);
+            }
+        }
+
+
     }
 
 }

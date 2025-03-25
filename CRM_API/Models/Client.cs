@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace CRM_API.Models;
 
 public partial class Client
 {
-    public Guid ClientId { get; set; }
+    [Key]
+    [Column("ClientID")] 
+    public Guid ClientID { get; set; }
 
-    public int? TitleId { get; set; }
+    public int? TitleID { get; set; }
 
     public string ClientName { get; set; } = null!;
 
@@ -21,7 +25,7 @@ public partial class Client
 
     public byte[]? ClientProfilePicture { get; set; }
 
-    public int? TypeId { get; set; }
+    public int? TypeID { get; set; }
 
     public virtual ICollection<ClientsLogin> ClientsLogins { get; set; } = new List<ClientsLogin>();
 

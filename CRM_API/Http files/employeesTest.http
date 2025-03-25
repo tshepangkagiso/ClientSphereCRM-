@@ -1,0 +1,53 @@
+﻿@CRM_API_HostAddress = https://localhost:7129
+
+
+### ✅ Successful GET request (Get All Employees)
+GET {{CRM_API_HostAddress}}/employee
+
+### ✅ Successful GET request (Get Employee by ID)
+GET {{CRM_API_HostAddress}}/employee/0cd94ad9-6d65-45f7-b368-344c6afaf0a0
+
+### ❌ Bad GET request (Invalid Guid format)
+GET {{CRM_API_HostAddress}}/employee/INVALID_GUID
+
+### ❌ Bad GET request (Non-existing employee)
+GET {{CRM_API_HostAddress}}/employee/22222222-2222-2222-2222-222222222222
+
+### ✅ Successful POST request (Create Employee)
+POST {{CRM_API_HostAddress}}/employee
+Content-Type: application/json
+
+{
+  "titleID": 1,
+  "employeeName": "Sam",
+  "employeeSurname": "Doe",
+  "loginUsername": "Samdoe",
+  "loginPassword": "SecurePassword123"
+}
+
+### ❌ Bad POST request (Missing fields)
+POST {{CRM_API_HostAddress}}/employee
+Content-Type: application/json
+
+{
+  "titleID": 1,
+  "employeeName": "John",
+  "employeeSurname": "Doe"
+}
+
+### ❌ Bad POST request (Invalid data type)
+POST {{CRM_API_HostAddress}}/employee
+Content-Type: application/json
+
+{
+  "titleID": "INVALID_TYPE",
+  "employeeName": "John",
+  "employeeSurname": "Doe",
+  "loginUsername": "johndoe",
+  "loginPassword": "SecurePassword123"
+}
+
+---
+
+
+

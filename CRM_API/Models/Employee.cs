@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace CRM_API.Models;
 
 public partial class Employee
 {
-    public Guid EmployeeId { get; set; }
+    [Key]
+    [Column("EmployeeID")]
+    public Guid EmployeeID { get; set; }
 
-    public int? TitleId { get; set; }
+    public int? TitleID { get; set; }
 
     public string EmployeeName { get; set; } = null!;
 

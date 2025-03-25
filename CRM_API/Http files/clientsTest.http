@@ -1,0 +1,111 @@
+@CRM_API_HostAddress = https://localhost:7129
+
+### Test GET all clients from the stored procedure (Good Case)
+GET {{CRM_API_HostAddress}}/Client 
+Content-Type: application/json
+
+### Test GET all soft deleted clients from the stored procedure (Good Case)
+GET {{CRM_API_HostAddress}}/Backup
+Content-Type: application/json
+
+
+### Test GET client by ID from stored procedure (Good Case)
+GET {{CRM_API_HostAddress}}/Client/9e081e68-9437-4f11-97e3-0e7515449806
+Content-Type: application/json
+
+
+### Test GET client by ID from stored procedure (Bad Case - Invalid ID)
+GET {{CRM_API_HostAddress}}/Client/3ebdae4f-5aa5-4a80-a63a-be2daa92df81
+Content-Type: application/json
+
+
+### Test POST create new client (Good Case)
+POST {{CRM_API_HostAddress}}/Client 
+Content-Type: application/json
+
+{
+  "TitleId": 1,
+  "ClientName": "John",
+  "ClientSurname": "Doe",
+  "ClientEmail": "john5.doe@example.com",
+  "ClientContactNumber": "123-456-7890",
+  "ClientAddress": "123 Main St, Anytown, USA",
+  "ClientProfilePicture": "iVBORw0KGgoAAAANSUhEUgAA",
+  "TypeId": 1,
+  "LoginUsername":"john5.doe@example.com",
+  "LoginPassword":"password"
+}
+
+
+### Test POST create new client (Bad Case - Missing Client Name)
+POST {{CRM_API_HostAddress}}/Client 
+Content-Type: application/json
+
+{
+  "TitleId": 1,
+  "ClientSurname": "Doe",
+  "ClientEmail": "john.doe@example.com",
+  "ClientContactNumber": "1234567890",
+  "ClientAddress": "123 Main St, City, Country",
+  "ClientProfilePicture": "iVBORw0KGgoAAAANSUhEUgAA",
+  "TypeId": 2
+}
+
+
+### Test PUT update client by ID (Good Case)
+PUT {{CRM_API_HostAddress}}/Client/9e081e68-9437-4f11-97e3-0e7515449806
+Content-Type: application/json
+
+{
+  "TitleId": 1,
+  "ClientName": "Jane",
+  "ClientSurname": "Doe",
+  "ClientEmail": "jane2.doe@example.com",
+  "ClientContactNumber": "0987654321",
+  "ClientAddress": "456 Main St, City, Country",
+  "ClientProfilePicture": "iVBORw0KGgoAAAANSUhEUgAA",
+  "TypeId": 4
+}
+
+### Test PUT update client by ID (Bad Case - Invalid Client ID)
+PUT {{CRM_API_HostAddress}}/Client/9e081e68-9437-4f11-97e3-0e7515449806
+Content-Type: application/json
+
+{
+  "Id": "invalid-client-id",
+  "TitleId": 1,
+  "ClientName": "Jane",
+  "ClientSurname": "Doe",
+  "ClientEmail": "jane.doe@example.com",
+  "ClientContactNumber": "0987654321",
+  "ClientAddress": "456 Main St, City, Country",
+  "ClientProfilePicture": "base64encodedimage",
+  "TypeId": 4
+}
+
+### Test DELETE client by ID (Good Case)
+DELETE {{CRM_API_HostAddress}}/Client/6910035f-1609-4f88-a6d8-afa3c5228c20
+Content-Type: application/json
+
+
+### Test DELETE client by ID (Bad Case - Invalid Client ID)
+DELETE {{CRM_API_HostAddress}}/Client/6910035f-1609-4f88-a6d8-afa3c5228c20
+Content-Type: application/json
+
+
+
+### Test PUT update client type (Good Case)
+PUT {{CRM_API_HostAddress}}/Client/1/3 
+Content-Type: application/json
+
+
+### Test PUT update client type (Bad Case - Invalid Client ID)
+PUT {{CRM_API_HostAddress}}/Client/3/1 
+Content-Type: application/json
+
+
+
+
+
+
+

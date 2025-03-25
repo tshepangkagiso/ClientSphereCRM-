@@ -1,10 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CRM_API.Models;
 
 public partial class Comment
 {
+    [Key]
     public int CommentId { get; set; }
 
     public string CommentMessage { get; set; } = null!;
