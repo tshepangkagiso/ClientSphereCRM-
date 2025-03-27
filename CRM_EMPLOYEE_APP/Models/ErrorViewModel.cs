@@ -1,4 +1,4 @@
-namespace CRM_EMPLOYEES_APP.Models
+namespace CRM_EMPLOYEE_APP.Models
 {
     public class ErrorViewModel
     {

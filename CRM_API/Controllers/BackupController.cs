@@ -1,4 +1,6 @@
 ﻿using CRM_API.Data.Services.Interfaces;
+using CRM_API.Services.Filters;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,6 +8,7 @@ namespace CRM_API.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    //[JwtAuthFilterAttribute]
     public class BackupController : ControllerBase
     {
         private readonly IClientDbServices clientDbServices;

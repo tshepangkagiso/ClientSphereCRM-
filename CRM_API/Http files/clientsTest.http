@@ -1,27 +1,30 @@
 @CRM_API_HostAddress = https://localhost:7129
+@Token = eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJDbGllbnQiOiJ0cnVlIiwiSUQiOiJiZjc3YWY0My04MjE1LTQzM2UtOTQ3MS1jOWQwMzZiZTJkNjkiLCJuYmYiOjE3NDI5NTI3OTIsImV4cCI6MTc0Mjk1NDU5Mn0.8ypsda4pCNO7mqi573JEZJr5m3-zzQTE4l-Sg4E1d-o
 
 ### Test GET all clients from the stored procedure (Good Case)
 GET {{CRM_API_HostAddress}}/Client 
 Content-Type: application/json
+Authorization: {{Token}}
 
 ### Test GET all soft deleted clients from the stored procedure (Good Case)
 GET {{CRM_API_HostAddress}}/Backup
 Content-Type: application/json
-
+Authorization: {{Token}}
 
 ### Test GET client by ID from stored procedure (Good Case)
 GET {{CRM_API_HostAddress}}/Client/9e081e68-9437-4f11-97e3-0e7515449806
 Content-Type: application/json
-
+Authorization: {{Token}}
 
 ### Test GET client by ID from stored procedure (Bad Case - Invalid ID)
 GET {{CRM_API_HostAddress}}/Client/3ebdae4f-5aa5-4a80-a63a-be2daa92df81
 Content-Type: application/json
-
+Authorization: {{Token}}
 
 ### Test POST create new client (Good Case)
 POST {{CRM_API_HostAddress}}/Client 
 Content-Type: application/json
+Authorization: {{Token}}
 
 {
   "TitleId": 1,
@@ -32,7 +35,7 @@ Content-Type: application/json
   "ClientAddress": "123 Main St, Anytown, USA",
   "ClientProfilePicture": "iVBORw0KGgoAAAANSUhEUgAA",
   "TypeId": 1,
-  "LoginUsername":"john5.doe@example.com",
+  "LoginUsername":"john.com",
   "LoginPassword":"password"
 }
 
@@ -40,6 +43,7 @@ Content-Type: application/json
 ### Test POST create new client (Bad Case - Missing Client Name)
 POST {{CRM_API_HostAddress}}/Client 
 Content-Type: application/json
+Authorization: {{Token}}
 
 {
   "TitleId": 1,
@@ -55,6 +59,7 @@ Content-Type: application/json
 ### Test PUT update client by ID (Good Case)
 PUT {{CRM_API_HostAddress}}/Client/9e081e68-9437-4f11-97e3-0e7515449806
 Content-Type: application/json
+Authorization: {{Token}}
 
 {
   "TitleId": 1,
@@ -70,6 +75,7 @@ Content-Type: application/json
 ### Test PUT update client by ID (Bad Case - Invalid Client ID)
 PUT {{CRM_API_HostAddress}}/Client/9e081e68-9437-4f11-97e3-0e7515449806
 Content-Type: application/json
+Authorization: {{Token}}
 
 {
   "Id": "invalid-client-id",
@@ -86,23 +92,24 @@ Content-Type: application/json
 ### Test DELETE client by ID (Good Case)
 DELETE {{CRM_API_HostAddress}}/Client/6910035f-1609-4f88-a6d8-afa3c5228c20
 Content-Type: application/json
+Authorization: {{Token}}
 
 
 ### Test DELETE client by ID (Bad Case - Invalid Client ID)
 DELETE {{CRM_API_HostAddress}}/Client/6910035f-1609-4f88-a6d8-afa3c5228c20
 Content-Type: application/json
-
+Authorization: {{Token}}
 
 
 ### Test PUT update client type (Good Case)
 PUT {{CRM_API_HostAddress}}/Client/1/3 
 Content-Type: application/json
-
+Authorization: {{Token}}
 
 ### Test PUT update client type (Bad Case - Invalid Client ID)
 PUT {{CRM_API_HostAddress}}/Client/3/1 
 Content-Type: application/json
-
+Authorization: {{Token}}
 
 
 

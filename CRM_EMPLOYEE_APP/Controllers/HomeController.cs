@@ -1,8 +1,8 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using CRM_EMPLOYEES_APP.Models;
+using CRM_EMPLOYEE_APP.Models;
 
-namespace CRM_EMPLOYEES_APP.Controllers;
+namespace CRM_EMPLOYEE_APP.Controllers;
 
 public class HomeController : Controller
 {

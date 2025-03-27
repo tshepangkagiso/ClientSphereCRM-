@@ -1,6 +1,8 @@
 ﻿using CRM_API.Data;
 using CRM_API.Data.Services.Interfaces;
 using CRM_API.Models.DTOs;
+using CRM_API.Services.Filters;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,6 +10,7 @@ namespace CRM_API.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    //[JwtAuthFilterAttribute]
     public class CommentController : ControllerBase
     {
         private readonly ICommentDbServices commentDbServices;
@@ -33,7 +36,8 @@ namespace CRM_API.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, ex.Message);
+                ModelState.AddModelError(string.Empty, "Server Error: " + ex.Message);
+                return StatusCode(500, ModelState);
             }
         }
         [HttpPost]
@@ -48,7 +52,8 @@ namespace CRM_API.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, ex.Message);
+                ModelState.AddModelError(string.Empty, "Server Error: " + ex.Message);
+                return StatusCode(500, ModelState);
             }
         }
 

@@ -3,14 +3,18 @@ using CRM_API.Data.Services.Interfaces;
 using CRM_API.Models;
 using CRM_API.Models.DTOs;
 using CRM_API.Services;
+using CRM_API.Services.Filters;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
 namespace CRM_API.Controllers
 {
+  
     [Route("[controller]")]
     [ApiController]
+    //[JwtAuthFilterAttribute]
     public class ClientController : ControllerBase
     {
         private readonly IClientDbServices clientDbServices;
@@ -131,6 +135,7 @@ namespace CRM_API.Controllers
             }
         }
 
+
         [HttpDelete("{Id}")]
         public async Task<IActionResult> OnDeleteAsync([FromRoute] Guid Id)
         {
@@ -153,6 +158,7 @@ namespace CRM_API.Controllers
                 return StatusCode(500, ModelState);
             }
         }
+
 
         [HttpPut("{OldTypeID}/{NewTypeID}")]
         public async Task<IActionResult> OnPutAsync([FromRoute]int OldTypeID, [FromRoute]int NewTypeID)

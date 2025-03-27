@@ -1,21 +1,27 @@
 ﻿@CRM_API_HostAddress = https://localhost:7129
-
+@Token =""
 
 ### ✅ Successful GET request (Get All Employees)
 GET {{CRM_API_HostAddress}}/employee
+Authorization: {{Token}}
 
 ### ✅ Successful GET request (Get Employee by ID)
 GET {{CRM_API_HostAddress}}/employee/0cd94ad9-6d65-45f7-b368-344c6afaf0a0
+Authorization: {{Token}}
 
 ### ❌ Bad GET request (Invalid Guid format)
 GET {{CRM_API_HostAddress}}/employee/INVALID_GUID
+Authorization: {{Token}}
 
 ### ❌ Bad GET request (Non-existing employee)
 GET {{CRM_API_HostAddress}}/employee/22222222-2222-2222-2222-222222222222
+Authorization: {{Token}}
 
 ### ✅ Successful POST request (Create Employee)
 POST {{CRM_API_HostAddress}}/employee
 Content-Type: application/json
+Authorization: {{Token}}
+
 
 {
   "titleID": 1,
@@ -28,6 +34,7 @@ Content-Type: application/json
 ### ❌ Bad POST request (Missing fields)
 POST {{CRM_API_HostAddress}}/employee
 Content-Type: application/json
+Authorization: {{Token}}
 
 {
   "titleID": 1,
@@ -38,6 +45,7 @@ Content-Type: application/json
 ### ❌ Bad POST request (Invalid data type)
 POST {{CRM_API_HostAddress}}/employee
 Content-Type: application/json
+Authorization: {{Token}}
 
 {
   "titleID": "INVALID_TYPE",

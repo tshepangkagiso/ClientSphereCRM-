@@ -1,19 +1,20 @@
 @CRM_API_HostAddress = https://localhost:7129
 
-### Test login for employee
-POST {{CRM_API_HostAddress}}/LoginClient
+### Test login for client
+POST {{CRM_API_HostAddress}}/Login/client
 Content-Type: application/json
 
 {
-  "LoginUsername":"john5.doe@example.com",
+  "LoginUsername":"john.com",
   "LoginPassword":"password"
 }
 
-### Test login for client
-POST {{CRM_API_HostAddress}}/LoginEmployee
+### Test login for employee
+POST {{CRM_API_HostAddress}}/Login/employee
 Content-Type: application/json
 
 {
-  "loginUsername": "johndoe",
+  "loginUsername": "Samdoe",
   "loginPassword": "SecurePassword123"
 }
+
