@@ -10,6 +10,6 @@ namespace CRM_EMPLOYEE_APP.Http.Interfaces
         Task DeleteClient(Guid id);
         Task<T?> GetAllClientsAsync<T>();
         Task<T?> GetClientByIdAsync<T>(Guid id);
-        Task UpdateClientAsync<T>(Client client);
+        Task UpdateClientAsync<T>(UpdateClientDTO updateClientDto);
     }
 }

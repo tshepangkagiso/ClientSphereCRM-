@@ -100,15 +100,15 @@ namespace CRM_API.Controllers
             }
         }
 
-        [HttpPut("{Id}")]
-        public async Task<IActionResult> OnPutAsync([FromRoute] Guid Id, [FromBody] ClientDto clientDto)
+        [HttpPut]
+        public async Task<IActionResult> OnPutAsync([FromBody] UpdateClientDto clientDto)
         {
             try
             {
                 if (!ModelState.IsValid) return BadRequest(ModelState);
 
 
-                var client = this.clientDbServices.GetClientByIdFromStoredProcedure(Id);
+                var client = this.clientDbServices.GetClientByIdFromStoredProcedure(clientDto.ClientID);
                 if (client.ClientID != Guid.Empty)
                 {
                     var title = Convert.ToInt32(clientDto.TitleId);

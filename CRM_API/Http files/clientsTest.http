@@ -4,7 +4,6 @@
 ### Test GET all clients from the stored procedure (Good Case)
 GET {{CRM_API_HostAddress}}/Client 
 Content-Type: application/json
-Authorization: {{Token}}
 
 ### Test GET all soft deleted clients from the stored procedure (Good Case)
 GET {{CRM_API_HostAddress}}/Backup
@@ -43,7 +42,6 @@ Authorization: {{Token}}
 ### Test POST create new client (Bad Case - Missing Client Name)
 POST {{CRM_API_HostAddress}}/Client 
 Content-Type: application/json
-Authorization: {{Token}}
 
 {
   "TitleId": 1,
@@ -57,12 +55,12 @@ Authorization: {{Token}}
 
 
 ### Test PUT update client by ID (Good Case)
-PUT {{CRM_API_HostAddress}}/Client/9e081e68-9437-4f11-97e3-0e7515449806
+PUT {{CRM_API_HostAddress}}/Client
 Content-Type: application/json
-Authorization: {{Token}}
 
 {
-  "TitleId": 1,
+  "ClientID":"bf77af43-8215-433e-9471-c9d036be2d69",
+  "TitleId": 2,
   "ClientName": "Jane",
   "ClientSurname": "Doe",
   "ClientEmail": "jane2.doe@example.com",
@@ -78,7 +76,7 @@ Content-Type: application/json
 Authorization: {{Token}}
 
 {
-  "Id": "invalid-client-id",
+  "ClientID":"9e081e68-9437-4f11-97e3-0e7515449806",
   "TitleId": 1,
   "ClientName": "Jane",
   "ClientSurname": "Doe",

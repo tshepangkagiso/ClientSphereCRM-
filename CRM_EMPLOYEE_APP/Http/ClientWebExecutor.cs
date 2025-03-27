@@ -1,5 +1,4 @@
 ﻿using CRM_EMPLOYEE_APP.Http.Interfaces;
-using CRM_EMPLOYEE_APP.Models;
 using CRM_EMPLOYEE_APP.Models.DTOs;
 
 namespace CRM_EMPLOYEE_APP.Http
@@ -35,9 +34,9 @@ namespace CRM_EMPLOYEE_APP.Http
         }
 
         //Update client
-        public async Task UpdateClientAsync<T>(Client client)
+        public async Task UpdateClientAsync<T>(UpdateClientDTO updateClientDto)
         {
-            var response = await this.GetHttpClient().PutAsJsonAsync("/Client", client);
+            var response = await this.GetHttpClient().PutAsJsonAsync("/Client", updateClientDto);
             response.EnsureSuccessStatusCode();
         }
 

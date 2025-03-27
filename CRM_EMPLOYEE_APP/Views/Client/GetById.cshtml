@@ -2,7 +2,7 @@
 <div class="container mt-5">
     <h2 class="mb-4">Client Form</h2>
 
-    <form asp-action="Save" method="post" enctype="multipart/form-data">
+    <form asp-action="Update" method="post" enctype="multipart/form-data">
         <!-- Hidden field for ClientID -->
         <input type="hidden" asp-for="@Model.ClientID" />
 
@@ -62,7 +62,6 @@
                 <option value="1">New Client</option>
                 <option value="2">Important Client</option>
                 <option value="3">Super Client</option>
-                <option value="4">Client Removed</option>
             </select>
             <span asp-validation-for="@Model.TypeID" class="text-danger"></span>
         </div>
@@ -82,8 +81,7 @@
             <button type="submit" class="btn btn-primary">Update</button>
 
             <!-- Delete Button -->
-            <form asp-action="Delete" method="post" onsubmit="return confirm('Are you sure you want to delete this client?');" style="display: inline;">
-                <input type="hidden" asp-for="ClientID" />
+            <form asp-action="Delete" asp-route-id ="@Model.ClientID" method="post" onsubmit="return confirm('Are you sure you want to delete this client?');" style="display: inline;">
                 <button type="submit" class="btn btn-danger ml-2">Delete</button>
             </form>
             <a asp-action="Index" class="btn btn-secondary ml-2">Cancel</a>

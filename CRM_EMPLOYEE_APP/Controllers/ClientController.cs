@@ -98,5 +98,79 @@ namespace CRM_EMPLOYEE_APP.Controllers
             }
 
         }
+
+
+        public async Task<IActionResult> Update([FromForm] UpdateClientForm clientDto)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                    return BadRequest(ModelState);
+
+                var dbClient = await webExecutor.GetClientByIdAsync<Client>(clientDto.ClientID);
+
+                if (dbClient == null)
+                    return BadRequest(clientDto);
+
+                UpdateClientDTO client = new UpdateClientDTO
+                {
+                    ClientID = dbClient.ClientID,
+                    TitleId = clientDto.TitleId,
+                    ClientName = clientDto.ClientName,
+                    ClientSurname = clientDto.ClientSurname,
+                    ClientContactNumber = clientDto.ClientContactNumber,
+                    ClientEmail = clientDto.ClientEmail,
+                    ClientAddress = clientDto.ClientAddress,
+                    TypeId = clientDto.TypeId,
+
+                };
+
+                if (clientDto.ClientProfilePicture != null) 
+                {
+                    Stream content = clientDto.ClientProfilePicture.OpenReadStream();
+                    client.ClientProfilePicture = await ImageServices.ProcessImage(content);
+                }
+                else
+                {
+                    client.ClientProfilePicture = dbClient.ClientProfilePicture;
+                }
+
+                await webExecutor.UpdateClientAsync<UpdateClientDTO>(client);
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return RedirectToAction("/Home/Error");
+            }
+        }
+
+
+
+        [HttpPost("{id:guid}")]
+        public async Task<IActionResult> Delete([FromRoute] Guid id)
+        {
+            try
+            {
+                var client = await webExecutor.GetClientByIdAsync<Client>(id);
+                if (client == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    await webExecutor.DeleteClient(id);
+                    return RedirectToAction("/Index");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return RedirectToAction("/Home/Error");
+            }
+
+        }
+
+
     }
 }
