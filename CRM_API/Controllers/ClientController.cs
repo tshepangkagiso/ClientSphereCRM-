@@ -80,7 +80,7 @@ namespace CRM_API.Controllers
                     var email = client.ClientEmail;
                     var address = client.ClientAddress;
                     var contacts = client.ClientContactNumber;
-                    byte[] photo = string.IsNullOrEmpty(client.ClientProfilePicture) ? new byte[] { } : Convert.FromBase64String(client.ClientProfilePicture);
+                    byte[] photo = client.ClientProfilePicture;
                     var type = client.TypeId;
                     var username = client.LoginUsername;
                     var password = PasswordServices.EncryptPassword(client.LoginPassword);
@@ -117,7 +117,7 @@ namespace CRM_API.Controllers
                     var email = clientDto.ClientEmail;
                     var address = clientDto.ClientAddress;
                     var contacts = clientDto.ClientContactNumber;
-                    byte[] photo = string.IsNullOrEmpty(clientDto.ClientProfilePicture) ? new byte[] { } : Convert.FromBase64String(clientDto.ClientProfilePicture);
+                    byte[] photo = client.ClientProfilePicture;
                     var type = clientDto.TypeId;
 
                     await this.clientDbServices.UpdateClient(client.ClientID, title, name, surname, email ?? "", contacts, address, photo, type);
@@ -151,24 +151,6 @@ namespace CRM_API.Controllers
 
                 ModelState.AddModelError(string.Empty, "Client not found.");
                 return BadRequest(ModelState);
-            }
-            catch (Exception ex)
-            {
-                ModelState.AddModelError(string.Empty, "Server Error: " + ex.Message);
-                return StatusCode(500, ModelState);
-            }
-        }
-
-
-        [HttpPut("{OldTypeID}/{NewTypeID}")]
-        public async Task<IActionResult> OnPutAsync([FromRoute]int OldTypeID, [FromRoute]int NewTypeID)
-        {
-            try
-            {
-                if (!ModelState.IsValid) return BadRequest(ModelState);
-                await this.clientDbServices.UpdateClientsType(OldTypeID, NewTypeID);
-                await this.clientDbServices.SaveChangesAsync();
-                return Ok("Successful Update of client type.");
             }
             catch (Exception ex)
             {

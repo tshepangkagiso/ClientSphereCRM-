@@ -1,0 +1,98 @@
+﻿@using CRM_EMPLOYEE_APP.Models.DTOs
+@model CreateClientForm
+
+<h1>Create Client</h1>
+<br />
+<div class="container mt-5">
+    <h2 class="mb-4">Client Registration Form</h2>
+
+    <form asp-action="Post" method="post" enctype="multipart/form-data">
+        <!-- Title -->
+        <div class="form-group">
+            <label asp-for="TitleId">Title</label>
+            <select asp-for="TitleId" class="form-control" required>
+                <option value="">Select Title</option>
+                <option value="1">Mr.</option>
+                <option value="2">Mrs.</option>
+                <option value="3">Miss.</option>
+                <option value="4">Dr.</option>
+                <option value="5">Prof.</option>
+            </select>
+            <span asp-validation-for="TitleId" class="text-danger"></span>
+        </div>
+
+        <!-- First Name -->
+        <div class="form-group">
+            <label asp-for="ClientName">First Name</label>
+            <input asp-for="ClientName" class="form-control" required />
+            <span asp-validation-for="ClientName" class="text-danger"></span>
+        </div>
+
+        <!-- Surname -->
+        <div class="form-group">
+            <label asp-for="ClientSurname">Surname</label>
+            <input asp-for="ClientSurname" class="form-control" required />
+            <span asp-validation-for="ClientSurname" class="text-danger"></span>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+            <label asp-for="ClientEmail">Email</label>
+            <input asp-for="ClientEmail" type="email" class="form-control" required />
+            <span asp-validation-for="ClientEmail" class="text-danger"></span>
+        </div>
+
+        <!-- Contact Number -->
+        <div class="form-group">
+            <label asp-for="ClientContactNumber">Contact Number</label>
+            <input asp-for="ClientContactNumber" type="tel" class="form-control" required />
+            <span asp-validation-for="ClientContactNumber" class="text-danger"></span>
+        </div>
+
+        <!-- Address -->
+        <div class="form-group">
+            <label asp-for="ClientAddress">Address</label>
+            <textarea asp-for="ClientAddress" class="form-control" rows="3" required></textarea>
+            <span asp-validation-for="ClientAddress" class="text-danger"></span>
+        </div>
+
+        <!-- Profile Picture -->
+        <div class="form-group">
+            <label asp-for="ClientProfilePicture">Profile Picture</label>
+            <input asp-for="ClientProfilePicture" type="file" class="form-control-file" accept="image/*" required />
+            <span asp-validation-for="ClientProfilePicture" class="text-danger"></span>
+        </div>
+
+        <!-- Client Type -->
+        <div class="form-group">
+            <label asp-for="TypeId">Client Type</label>
+            <select asp-for="TypeId" class="form-control" required>
+                <option value="">Select Client Type</option>
+                <option value="1">New Client</option>
+                <option value="2">Important Client</option>
+                <option value="3">Super Client</option>
+                <option value="4">Client Removed</option>
+            </select>
+            <span asp-validation-for="TypeId" class="text-danger"></span>
+        </div>
+
+        <!-- Username -->
+        <div class="form-group">
+            <label asp-for="LoginUsername">Username</label>
+            <input asp-for="LoginUsername" class="form-control" required />
+            <span asp-validation-for="LoginUsername" class="text-danger"></span>
+        </div>
+
+        <!-- Password -->
+        <div class="form-group">
+            <label asp-for="LoginPassword">Password</label>
+            <input asp-for="LoginPassword" type="password" class="form-control" required />
+            <span asp-validation-for="LoginPassword" class="text-danger"></span>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a asp-action="Index" class="btn btn-secondary ml-2">Cancel</a>
+    </form>
+</div>
+

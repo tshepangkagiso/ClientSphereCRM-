@@ -1,15 +1,22 @@
-var builder = WebApplication.CreateBuilder(args);
+using CRM_EMPLOYEE_APP.Http;
+using CRM_EMPLOYEE_APP.Http.Interfaces;
 
-// Add services to the container.
+var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddHttpClient("CRM_API", client =>
+{
+    client.BaseAddress = new Uri("https://localhost:7129");
+    client.DefaultRequestHeaders.Add("Accept", "application/json");
+});
+
+builder.Services.AddTransient<IClientWebExecutor, ClientWebExecutor>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 

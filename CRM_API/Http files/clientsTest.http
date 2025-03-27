@@ -101,17 +101,6 @@ Content-Type: application/json
 Authorization: {{Token}}
 
 
-### Test PUT update client type (Good Case)
-PUT {{CRM_API_HostAddress}}/Client/1/3 
-Content-Type: application/json
-Authorization: {{Token}}
-
-### Test PUT update client type (Bad Case - Invalid Client ID)
-PUT {{CRM_API_HostAddress}}/Client/3/1 
-Content-Type: application/json
-Authorization: {{Token}}
-
-
 
 
 

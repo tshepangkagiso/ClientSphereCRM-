@@ -1,0 +1,73 @@
+﻿@model List<Client>
+<h1>Clients</h1>
+<br />
+<a class="btn btn-primary" asp-controller="Client" asp-action="CreateClient">Add Client</a>
+<table class="table-striped table">
+    <thead>
+        <tr>
+            <td>Title</td>
+            <td>Full Name</td>
+            <td>Email</td>
+            <td>Contacts</td>
+            <td>Address</td>
+            <td>Type</td>
+            <td>Image</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var client in Model)
+        {
+            <tr>
+                <td>
+                    @switch (client.TitleID.ToString())
+                    {
+                        case "1":
+                            <span>Mr.</span>
+                            break;
+                        case "2":
+                            <span>Mrs.</span>
+                            break;
+                        case "3":
+                            <span>Miss.</span>
+                            break;
+                        case "4":
+                            <span>Dr.</span>
+                            break;
+                        case "5":
+                            <span>Prof.</span>
+                            break;
+                        default:
+                            <span>Mr.</span>
+                            break;
+                    }
+                </td>
+                <td>@client.ClientName @client.ClientSurname</td>
+                <td>@client.ClientEmail</td>
+                <td>@client.ClientContactNumber</td>
+                <td>@client.ClientAddress</td>
+                <td>
+                    @switch (client.TypeID.ToString())
+                    {
+                        case "1":
+                            <span>New Client</span>
+                            break;
+                        case "2":
+                            <span>Important Client</span>
+                            break;
+                        case "3":
+                            <span>Super Client</span>
+                            break;
+                        case "4":
+                            <span>Client Removed</span>
+                            break;
+                        default:
+                            <span>New Client</span>
+                            break;
+                    }
+                </td>
+                <td><img alt="client"/></td>
+                <td><a class="btn btn-primary" asp-action="GetById" asp-route-id="@client.ClientID">View</a></td>                
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,6 +1,6 @@
-﻿namespace CRM_API.Models.DTOs
+﻿namespace CRM_EMPLOYEE_APP.Models.DTOs
 {
-    public class ClientDto
+    public class CreateClientDTO
     {
         public int TitleId { get; set; }
 
@@ -17,6 +17,9 @@
         public byte[] ClientProfilePicture { get; set; } = Array.Empty<byte>();
 
         public int TypeId { get; set; }
-   
+
+        public string LoginUsername { get; set; } = null!;
+
+        public string LoginPassword { get; set; } = null!;
     }
 }

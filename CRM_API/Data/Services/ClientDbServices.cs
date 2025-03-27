@@ -49,13 +49,6 @@ namespace CRM_API.Data.Services
                 TitleID, ClientName, ClientSurname, ClientEmail, ClientContactNumber, ClientAddress, ClientProfilePicture, TypeID,LoginUsername,LoginPassword);
         }
 
-
-        // Update clients type from the stored procedure
-        public async Task UpdateClientsType(int OldTypeID, int NewTypeID)
-        {
-            await this.dbContext.Database.ExecuteSqlRawAsync("EXEC spUpdateClientsType @OldTypeID = {0}, @NewTypeID = {1}",OldTypeID, NewTypeID);
-        }
-
         // Update client information from the stored procedure
         public async Task UpdateClient(Guid ClientID, int TitleID, string ClientName, string ClientSurname,
                                         string ClientEmail, string ClientContactNumber, string ClientAddress,

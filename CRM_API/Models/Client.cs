@@ -23,7 +23,7 @@ public partial class Client
 
     public string ClientAddress { get; set; } = null!;
 
-    public byte[]? ClientProfilePicture { get; set; }
+    public byte[] ClientProfilePicture { get; set; } = Array.Empty<byte>();
 
     public int? TypeID { get; set; }
 
