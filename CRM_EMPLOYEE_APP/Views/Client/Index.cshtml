@@ -2,8 +2,8 @@
 <h1>Clients</h1>
 <br />
 <a class="btn btn-primary" asp-controller="Client" asp-action="CreateClient">Add Client</a>
-<table class="table-striped table">
-    <thead>
+<table class="table-striped table-hover table">
+    <thead class="table-dark">
         <tr>
             <td>Title</td>
             <td>Full Name</td>
@@ -12,10 +12,11 @@
             <td>Address</td>
             <td>Type</td>
             <td>Image</td>
+            <td>Action</td>
         </tr>
     </thead>
     <tbody>
-        @foreach(var client in Model)
+        @foreach (var client in Model)
         {
             <tr>
                 <td>
@@ -65,9 +66,18 @@
                             break;
                     }
                 </td>
-                <td><img alt="client"/></td>
-                <td><a class="btn btn-primary" asp-action="GetById" asp-route-id="@client.ClientID">View</a></td>                
+                <td class="text-center">
+                    <img src="/Client/Image/@client.ClientID"
+                         alt="client"
+                         style="width: 50px; height: 50px; object-fit: cover; border-radius: 100%;" />
+                </td>
+
+                <td>
+                    <a class="btn btn-sm btn-info" asp-action="GetById" asp-route-id="@client.ClientID">Update</a>
+                    <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@client.ClientID">Delete</a>
+                </td>
             </tr>
         }
     </tbody>
 </table>
+

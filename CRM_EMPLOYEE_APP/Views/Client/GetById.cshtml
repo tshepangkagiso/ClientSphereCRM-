@@ -1,6 +1,7 @@
 ﻿@model Client
-<div class="container mt-5">
-    <h2 class="mb-4">Client Form</h2>
+
+<div class="mt-5 container">
+    <h2 class="mb-4 text-center">Client Form</h2>
 
     <form asp-action="Update" method="post" enctype="multipart/form-data">
         <!-- Hidden field for ClientID -->
@@ -17,6 +18,7 @@
                 <option value="4">Dr.</option>
                 <option value="5">Prof.</option>
             </select>
+            <span asp-validation-for="@Model.TitleID" class="text-danger"></span>
         </div>
 
         <!-- First Name -->
@@ -71,20 +73,58 @@
             <label>Profile Image</label>
             <input type="file" name="ProfileImage" class="form-control-file" accept="image/*" />
             <div class="mt-2">
-                <img src="@Model.ClientProfilePicture" alt="Client Image" class="img-thumbnail" style="width: 100px; height: 100px;" />
+                <img src="/Client/Image/@Model.ClientID" alt="Client Image" class="img-thumbnail" style="width: 100px; height: 100px;" />
             </div>
         </div>
 
         <!-- Action Buttons -->
-        <div class="mt-3">
+        <div class="mt-3 text-center">
             <!-- Update Button -->
-            <button type="submit" class="btn btn-primary">Update</button>
-
-            <!-- Delete Button -->
-            <form asp-action="Delete" asp-route-id ="@Model.ClientID" method="post" onsubmit="return confirm('Are you sure you want to delete this client?');" style="display: inline;">
-                <button type="submit" class="btn btn-danger ml-2">Delete</button>
-            </form>
-            <a asp-action="Index" class="btn btn-secondary ml-2">Cancel</a>
+            <button type="submit" class="btn btn-primary btn-lg">Update</button>
+            <a asp-action="Index" class="btn btn-secondary btn-lg ml-2">Cancel</a>
         </div>
     </form>
 </div>
+
+<!-- Add some custom styling for better look -->
+<style>
+    .container {
+        max-width: 800px;
+    }
+
+    .form-group label {
+        font-weight: bold;
+    }
+
+    .form-control {
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-control-file {
+        border-radius: 8px;
+    }
+
+    .btn {
+        padding: 12px 20px;
+        font-size: 16px;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        border-color: #6c757d;
+    }
+
+    .btn:hover {
+        opacity: 0.9;
+    }
+
+    .img-thumbnail {
+        border-radius: 8px;
+    }
+</style>

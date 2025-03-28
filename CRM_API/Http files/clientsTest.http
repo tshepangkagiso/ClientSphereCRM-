@@ -88,9 +88,9 @@ Authorization: {{Token}}
 }
 
 ### Test DELETE client by ID (Good Case)
-DELETE {{CRM_API_HostAddress}}/Client/6910035f-1609-4f88-a6d8-afa3c5228c20
+DELETE {{CRM_API_HostAddress}}/Client/delete/fd18ee22-2e09-45d0-a67d-57109bf35e67
 Content-Type: application/json
-Authorization: {{Token}}
+
 
 
 ### Test DELETE client by ID (Bad Case - Invalid Client ID)

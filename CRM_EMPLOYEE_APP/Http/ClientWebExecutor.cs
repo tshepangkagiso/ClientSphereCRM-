@@ -26,11 +26,10 @@ namespace CRM_EMPLOYEE_APP.Http
         }
 
         //Create client
-        public async Task<T?> CreateClientAsync<T>(CreateClientDTO createClientDto)
+        public async Task CreateClientAsync<T>(CreateClientDTO createClientDto)
         {
             var response = await this.GetHttpClient().PostAsJsonAsync("/Client",createClientDto);
             response.EnsureSuccessStatusCode();
-            return await response.Content.ReadFromJsonAsync<T>();
         }
 
         //Update client
@@ -43,9 +42,22 @@ namespace CRM_EMPLOYEE_APP.Http
         //Delete client
         public async Task DeleteClient(Guid id)
         {
-            var response = await this.GetHttpClient().DeleteAsync($"/Client/{id}");
+            var response = await this.GetHttpClient().DeleteAsync($"/Client/delete/{id}");
             response.EnsureSuccessStatusCode();
         }
+
+        //Get Image
+        public async Task<Stream> GetClientImage(Guid id)
+        {
+            var response = await this.GetHttpClient().GetAsync($"/Client/image/{id}");
+            if (response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadAsStreamAsync(); 
+            }
+            throw new HttpRequestException($"Failed to get image: {response.StatusCode}");
+        }
+
+
 
         //Helper method to create httpclientfactor CreateClient()
         private HttpClient GetHttpClient()

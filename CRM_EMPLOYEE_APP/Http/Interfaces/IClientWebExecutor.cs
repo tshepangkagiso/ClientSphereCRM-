@@ -6,10 +6,11 @@ namespace CRM_EMPLOYEE_APP.Http.Interfaces
 {
     public interface IClientWebExecutor
     {
-        Task<T?> CreateClientAsync<T>(CreateClientDTO createClientDto);
+        Task CreateClientAsync<T>(CreateClientDTO createClientDto);
         Task DeleteClient(Guid id);
         Task<T?> GetAllClientsAsync<T>();
         Task<T?> GetClientByIdAsync<T>(Guid id);
+        Task<Stream> GetClientImage(Guid id);
         Task UpdateClientAsync<T>(UpdateClientDTO updateClientDto);
     }
 }

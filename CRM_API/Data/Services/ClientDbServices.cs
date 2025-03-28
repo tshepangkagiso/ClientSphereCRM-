@@ -1,5 +1,6 @@
 ﻿using CRM_API.Data.Services.Interfaces;
 using CRM_API.Models;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
 namespace CRM_API.Data.Services
@@ -65,6 +66,26 @@ namespace CRM_API.Data.Services
         public async Task DeleteClientById(Guid ClientID)
         {
             await this.dbContext.Database.ExecuteSqlRawAsync("EXEC spDeleteClientById @ClientID = {0}", ClientID);
+        }
+
+
+        //retrieving images
+        public async Task<Stream> GetImage(Guid id)
+        {
+            var data = this.dbContext.Database;
+            var dbConnection = (SqlConnection)data.GetDbConnection();
+
+            var command = new SqlCommand("SELECT ClientProfilePicture FROM Clients WHERE ClientID = @id;", dbConnection);
+            command.Parameters.Add(new SqlParameter("@id", id));
+            dbConnection.Open();
+            var reader = await command.ExecuteReaderAsync();
+            Stream result = null;
+            if (reader.HasRows)
+            {
+                while (reader.Read()) result = reader.GetStream(0);
+            }
+            reader.Close();
+            return result;
         }
 
         public async Task SaveChangesAsync()

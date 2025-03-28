@@ -3,6 +3,8 @@ using CRM_EMPLOYEE_APP.Models;
 using CRM_EMPLOYEE_APP.Models.DTOs;
 using CRM_EMPLOYEE_APP.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Net.Http.Headers;
+using System.Text.Json;
 
 namespace CRM_EMPLOYEE_APP.Controllers
 {
@@ -44,6 +46,8 @@ namespace CRM_EMPLOYEE_APP.Controllers
                 {
                     return NotFound();
                 }
+                /*var photo = this.File(client.ClientProfilePicture, "image/jpeg");
+                client.ClientProfilePicture = photo;*/
                 return View(client);
             }
             catch (Exception ex)
@@ -65,39 +69,35 @@ namespace CRM_EMPLOYEE_APP.Controllers
         {
             try
             {
-                if(!ModelState.IsValid) return BadRequest(ModelState);
-                CreateClientDTO createClient = new CreateClientDTO();
+                if (!ModelState.IsValid) return BadRequest(ModelState);
 
-                createClient.TitleId = clientDto.TitleId;
-                createClient.ClientName = clientDto.ClientName;
-                createClient.ClientSurname = clientDto.ClientSurname;
-                createClient.ClientContactNumber = clientDto.ClientContactNumber;
-                createClient.ClientEmail = clientDto.ClientEmail;
-                createClient.ClientAddress = clientDto.ClientAddress;
-                createClient.TypeId = clientDto.TypeId;
-                createClient.LoginUsername = clientDto.LoginUsername;
-                createClient.LoginPassword = clientDto.LoginPassword;
+                CreateClientDTO createClient = new CreateClientDTO
+                {
+                    TitleId = clientDto.TitleId,
+                    ClientName = clientDto.ClientName,
+                    ClientSurname = clientDto.ClientSurname,
+                    ClientContactNumber = clientDto.ClientContactNumber,
+                    ClientEmail = clientDto.ClientEmail,
+                    ClientAddress = clientDto.ClientAddress,
+                    TypeId = clientDto.TypeId,
+                    LoginUsername = clientDto.LoginUsername,
+                    LoginPassword = clientDto.LoginPassword
+                };
 
                 Stream content = clientDto.ClientProfilePicture.OpenReadStream();
-
                 createClient.ClientProfilePicture = await ImageServices.ProcessImage(content);
 
-                var response = await this.webExecutor.CreateClientAsync<CreateClientDTO>(createClient);
+                await this.webExecutor.CreateClientAsync<CreateClientDTO>(createClient);
 
-                if(response == null)
-                {
-                    return View(response);
-                }
-                return RedirectToAction("/Index");
-                
+                return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
                 return RedirectToAction("/Home/Error");
             }
-
         }
+
 
 
         public async Task<IActionResult> Update([FromForm] UpdateClientForm clientDto)
@@ -146,8 +146,6 @@ namespace CRM_EMPLOYEE_APP.Controllers
         }
 
 
-
-        [HttpPost("{id:guid}")]
         public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
             try
@@ -160,7 +158,7 @@ namespace CRM_EMPLOYEE_APP.Controllers
                 else
                 {
                     await webExecutor.DeleteClient(id);
-                    return RedirectToAction("/Index");
+                    return RedirectToAction("Index");
                 }
             }
             catch (Exception ex)
@@ -171,6 +169,21 @@ namespace CRM_EMPLOYEE_APP.Controllers
 
         }
 
+        public async Task<IActionResult> Image([FromRoute] Guid id) => this.ResultImage(await this.webExecutor.GetClientImage(id));
 
+
+
+        private IActionResult ResultImage(Stream image)
+        {
+            var header = Response.GetTypedHeaders();
+            header.CacheControl = new CacheControlHeaderValue
+            {
+                Public = true,
+                MaxAge = TimeSpan.FromDays(1) // 30days is ideal
+            };
+
+            header.Expires = new DateTimeOffset(DateTime.UtcNow.AddDays(1));
+            return this.File(image, "image/jpeg");
+        }
     }
 }

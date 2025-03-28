@@ -136,7 +136,7 @@ namespace CRM_API.Controllers
         }
 
 
-        [HttpDelete("{Id}")]
+        [HttpDelete("delete/{Id}")]
         public async Task<IActionResult> OnDeleteAsync([FromRoute] Guid Id)
         {
             try
@@ -158,6 +158,10 @@ namespace CRM_API.Controllers
                 return StatusCode(500, ModelState);
             }
         }
+
+
+        [HttpGet("image/{Id}")]
+        public async Task<IActionResult> OnGetImage([FromRoute] Guid Id) => this.File(await this.clientDbServices.GetImage(Id),"image/jpeg");
 
 
     }

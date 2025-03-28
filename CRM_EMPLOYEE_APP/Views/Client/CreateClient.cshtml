@@ -1,10 +1,11 @@
 ﻿@using CRM_EMPLOYEE_APP.Models.DTOs
 @model CreateClientForm
 
-<h1>Create Client</h1>
+<h1 class="my-4 text-center">Create Client</h1>
 <br />
-<div class="container mt-5">
-    <h2 class="mb-4">Client Registration Form</h2>
+<div class="mt-5 container">
+
+    <h2 class="mb-4 text-center">Client Registration Form</h2>
 
     <form asp-action="Post" method="post" enctype="multipart/form-data">
         <!-- Title -->
@@ -90,8 +91,43 @@
         </div>
 
         <!-- Submit Button -->
-        <button type="submit" class="btn btn-primary">Submit</button>
-        <a asp-action="Index" class="btn btn-secondary ml-2">Cancel</a>
+        <div class="form-group text-center">
+            <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+            <a asp-action="Index" class="btn btn-secondary btn-lg ml-2">Cancel</a>
+        </div>
     </form>
 </div>
+
+<!-- Add some custom styling for the form -->
+<style>
+    .container {
+        max-width: 800px;
+    }
+    .form-group label {
+        font-weight: bold;
+    }
+    .form-control {
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .form-control-file {
+        border-radius: 8px;
+    }
+    .btn {
+        padding: 10px 20px;
+        font-size: 16px;
+    }
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+    .btn-secondary {
+        background-color: #6c757d;
+        border-color: #6c757d;
+    }
+    .btn:hover {
+        opacity: 0.9;
+    }
+</style>
+
 
