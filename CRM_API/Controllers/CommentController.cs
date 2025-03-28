@@ -10,7 +10,7 @@ namespace CRM_API.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    //[JwtAuthFilterAttribute]
+    [JwtAuthFilterAttribute]
     public class CommentController : ControllerBase
     {
         private readonly ICommentDbServices commentDbServices;

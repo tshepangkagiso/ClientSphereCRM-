@@ -7,10 +7,12 @@ namespace CRM_EMPLOYEE_APP.Http
     {
         private const string apiName = "CRM_API";
         private readonly IHttpClientFactory httpClientFactory;
+        private readonly IHttpContextAccessor httpContextAccessor;
 
-        public ClientWebExecutor(IHttpClientFactory httpClientFactory)
+        public ClientWebExecutor(IHttpClientFactory httpClientFactory, IHttpContextAccessor httpContextAccessor)
         {
             this.httpClientFactory = httpClientFactory;
+            this.httpContextAccessor = httpContextAccessor;
         }
 
         //Get all client
@@ -62,7 +64,16 @@ namespace CRM_EMPLOYEE_APP.Http
         //Helper method to create httpclientfactor CreateClient()
         private HttpClient GetHttpClient()
         {
-            return httpClientFactory.CreateClient(apiName);
+            var client = httpClientFactory.CreateClient(apiName);
+
+            var token = httpContextAccessor.HttpContext?.Session.GetString("JwtToken");
+
+            if (!string.IsNullOrEmpty(token))
+            {
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue(token);
+            }
+
+            return client;
         }
     }
 }

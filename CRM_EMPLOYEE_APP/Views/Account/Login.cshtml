@@ -1,0 +1,26 @@
+﻿@using CRM_EMPLOYEE_APP.Models.DTOs
+@{
+    ViewData["Title"] = "Login Page";
+}
+
+@model AuthUserDTO
+<h1>Login</h1>
+<br />
+<form asp-action="LoginPost" method="post">
+    <div class="form-group mb-3">
+        <label asp-for="@Model.UserName"></label>
+        <input asp-for="@Model.UserName" class="form-control" />
+        <span asp-validation-for="@Model.UserName"></span>
+    </div>
+    <div class="form-group mb-3">
+        <label asp-for="@Model.Password"></label>
+        <input asp-for="@Model.Password" type="password" class="form-control" />
+        <span asp-validation-for="@Model.Password"></span>
+    </div>
+    <div class="form-check mb-3">
+        <label asp-for="@Model.RememberMe"></label>
+        <input asp-for="@Model.RememberMe" type="checkbox" class="form-check-input" />
+        <span asp-validation-for="@Model.RememberMe"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

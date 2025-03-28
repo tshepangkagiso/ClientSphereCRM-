@@ -12,7 +12,6 @@ namespace CRM_API.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    //[JwtAuthFilterAttribute]
     public class EmployeeController : ControllerBase
     {
         private readonly IEmployeeDbServices employeeDbServices;

@@ -14,7 +14,7 @@ namespace CRM_API.Controllers
   
     [Route("[controller]")]
     [ApiController]
-    //[JwtAuthFilterAttribute]
+    [JwtAuthFilterAttribute]
     public class ClientController : ControllerBase
     {
         private readonly IClientDbServices clientDbServices;

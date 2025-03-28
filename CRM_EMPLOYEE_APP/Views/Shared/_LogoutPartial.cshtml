@@ -1,0 +1,12 @@
+﻿@if (User?.Identity?.IsAuthenticated == true)
+{
+    <form asp-action="Logout" asp-controller="Account" method="post">
+        Employee: @User?.Identity?.Name
+        <button class="btn btn-link ml-2" type="submit">Logout</button>
+    </form>
+}
+
+else
+{
+    <a class="btn btn-link" asp-controller="Account" asp-action="Login">Login</a>
+}

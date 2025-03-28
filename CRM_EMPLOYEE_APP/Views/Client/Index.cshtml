@@ -1,4 +1,8 @@
-﻿@model List<Client>
+﻿@{
+    ViewData["Title"] = "View All Clients";
+}
+
+@model List<Client>
 <h1>Clients</h1>
 <br />
 <a class="btn btn-primary" asp-controller="Client" asp-action="CreateClient">Add Client</a>

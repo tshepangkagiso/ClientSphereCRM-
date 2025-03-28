@@ -2,12 +2,14 @@
 using CRM_EMPLOYEE_APP.Models;
 using CRM_EMPLOYEE_APP.Models.DTOs;
 using CRM_EMPLOYEE_APP.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Net.Http.Headers;
 using System.Text.Json;
 
 namespace CRM_EMPLOYEE_APP.Controllers
 {
+    [Authorize]
     public class ClientController : Controller
     {
         private readonly IClientWebExecutor webExecutor;
@@ -31,7 +33,8 @@ namespace CRM_EMPLOYEE_APP.Controllers
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
-                return RedirectToAction("/Home/Error");
+                //return RedirectToAction("/Home/Error");
+                return RedirectToAction("Error", "Home");
             }
             
         }
@@ -53,7 +56,8 @@ namespace CRM_EMPLOYEE_APP.Controllers
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
-                return RedirectToAction("/Home/Error");
+                //return RedirectToAction("/Home/Error");
+                return RedirectToAction("Error", "Home");
             }
 
         }
@@ -89,12 +93,13 @@ namespace CRM_EMPLOYEE_APP.Controllers
 
                 await this.webExecutor.CreateClientAsync<CreateClientDTO>(createClient);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Client");
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
-                return RedirectToAction("/Home/Error");
+                //return RedirectToAction("/Home/Error");
+                return RedirectToAction("Error", "Home");
             }
         }
 
@@ -136,12 +141,13 @@ namespace CRM_EMPLOYEE_APP.Controllers
                 }
 
                 await webExecutor.UpdateClientAsync<UpdateClientDTO>(client);
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Client");
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
-                return RedirectToAction("/Home/Error");
+                //return RedirectToAction("/Home/Error");
+                return RedirectToAction("Error", "Home");
             }
         }
 
@@ -158,13 +164,14 @@ namespace CRM_EMPLOYEE_APP.Controllers
                 else
                 {
                     await webExecutor.DeleteClient(id);
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index","Client");
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
-                return RedirectToAction("/Home/Error");
+                //return RedirectToAction("/Home/Error");
+                return RedirectToAction("Error", "Home");
             }
 
         }
