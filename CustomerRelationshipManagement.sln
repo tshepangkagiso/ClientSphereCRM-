@@ -17,6 +17,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "README", "README", "{8EC462
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRM_EMPLOYEE_APP", "CRM_EMPLOYEE_APP\CRM_EMPLOYEE_APP.csproj", "{14AD25F4-B8B7-4C85-95BE-D6C2CE28E24E}"
 EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "CRM_CLIENTS", "CRM_CLIENTS\CRM_CLIENTS.esproj", "{166A348E-D336-3F2C-BE1F-0EC6EBE8DCF0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,12 @@ Global
 		{14AD25F4-B8B7-4C85-95BE-D6C2CE28E24E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14AD25F4-B8B7-4C85-95BE-D6C2CE28E24E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14AD25F4-B8B7-4C85-95BE-D6C2CE28E24E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{166A348E-D336-3F2C-BE1F-0EC6EBE8DCF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{166A348E-D336-3F2C-BE1F-0EC6EBE8DCF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{166A348E-D336-3F2C-BE1F-0EC6EBE8DCF0}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{166A348E-D336-3F2C-BE1F-0EC6EBE8DCF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{166A348E-D336-3F2C-BE1F-0EC6EBE8DCF0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{166A348E-D336-3F2C-BE1F-0EC6EBE8DCF0}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
